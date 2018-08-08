@@ -3,7 +3,7 @@
 
     <div class="resource-operation">
       <el-row>
-          <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="guide">新增标签</el-button>
+          <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="tagNew">新增标签</el-button>
       </el-row>
     </div>
 
@@ -57,7 +57,6 @@ export default {
   name: 'tagList',
   data() {
     return {
-      dialogFormVisible: true,
       list: null,
       total: 0,
       listLoading: true,
@@ -96,6 +95,9 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val
       this.getList()
+    },
+    tagNew() {
+      this.$router.push('/goods/tag/create')
     }
   }
 }
