@@ -8,13 +8,19 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const dotenv = require('dotenv')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
+dotenv.config()
+
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+
+console.log(process.env)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {

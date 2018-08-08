@@ -15,6 +15,12 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+console.log(process.env.BASE_API)
+
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
