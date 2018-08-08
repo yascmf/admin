@@ -44,7 +44,7 @@ npm run build --report
 ```
 
 ## Demo
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
+![demo](https://raw.githubusercontent.com/PanJiaChen/PanJiaChen.github.io/master/images/demo.gif)
 
 ### Element-Ui 使用cdn教程
 首先找到 `index.html` ([根目录下](https://github.com/PanJiaChen/vueAdmin-template/blob/element-ui-cdn/index.html))
