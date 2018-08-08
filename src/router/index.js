@@ -40,21 +40,21 @@ export const constantRouterMap = [
   {
     path: '/goods',
     component: Layout,
-    redirect: '/goods/table',
+    redirect: '/goods/tag',
     name: 'Goods',
     meta: { title: 'Goods', icon: 'commodity' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'tag',
+        name: 'Tag',
+        component: () => import('@/views/goods/tag/index'),
+        meta: { title: 'Tag', icon: 'tag' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'tag/create',
+        name: 'tag_create',
+        component: () => import('@/views/goods/tag/create'),
+        meta: { title: 'Create Tag', icon: 'tag' }
       }
     ]
   },
