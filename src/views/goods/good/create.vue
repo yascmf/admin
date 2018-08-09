@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-      <el-form-item label="标签名称" prop="name">
+    <el-form ref="form" :model="form" :rules="rules" label-width="120px" @submit.prevent>
+      <el-form-item label="货品名称" prop="name">
         <el-input v-model="form.name" placeholder="请输入标签名称"></el-input>
       </el-form-item>
-      <el-form-item label="标签描述" prop="desc">
+      <el-form-item label="货品资源地址" prop="desc">
         <el-input v-model="form.desc" placeholder="请输入标签描述，可留空"></el-input>
       </el-form-item>
       <el-form-item>
@@ -46,7 +46,7 @@ export default {
           this.loading = true
           createTag(this.form.name, this.form.desc).then(response => {
             this.loading = false
-            this.$router.push({ path: '/Goods/tag' })
+            this.$router.push({ path: '/goods/tag' })
           }).catch(() => {
             this.loading = false
           })
