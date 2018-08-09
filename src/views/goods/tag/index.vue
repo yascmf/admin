@@ -34,7 +34,7 @@
 
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">
-          <router-link :to="'/goods/tag/'+scope.row.id+'/edit'">
+          <router-link>
             <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
@@ -97,7 +97,7 @@ export default {
       this.getList()
     },
     tagNew() {
-      this.$router.push('/goods/tag/create')
+      this.$router.push({ path: '/goods/tag/create' })
     }
   }
 }

@@ -7,3 +7,14 @@ export function fetchTagList(query) {
     params: query // page limit
   })
 }
+
+export function createTag(name, desc) {
+  return request({
+    url: '/goods/tag/create',
+    method: 'post',
+    data: {
+      name,
+      desc
+    }
+  })
+}

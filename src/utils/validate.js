@@ -31,3 +31,12 @@ export function validatAlphabets(str) {
   return reg.test(str)
 }
 
+/**
+ * 校验是否空字符
+ *
+ * @param string str
+ */
+export function validateEmptyString(str) {
+  const reg = /^\s*$/
+  return (!str || str.length === 0 || reg.test(str))
+}
