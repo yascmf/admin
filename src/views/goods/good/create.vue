@@ -1,12 +1,29 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" :rules="rules" label-width="120px" @submit.prevent>
+    <el-form ref="form" :model="form" :rules="rules" label-width="120px" @submit.native.prevent>
       <el-form-item label="货品名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入标签名称"></el-input>
+        <el-input v-model="form.name" placeholder="请输入货品名称"></el-input>
       </el-form-item>
-      <el-form-item label="货品资源地址" prop="desc">
-        <el-input v-model="form.desc" placeholder="请输入标签描述，可留空"></el-input>
+      <el-form-item label="货品描述" prop="desc">
+        <el-input v-model="form.desc" placeholder="请输入货品描述"></el-input>
       </el-form-item>
+      <el-form-item label="货品资源地址" prop="src">
+        <el-input v-model="form.desc" placeholder="请输入货品资源地址，可留空"></el-input>
+      </el-form-item>
+      <el-form-item label="资源类型" prop="type">
+        <el-radio-group v-model="form.type">
+          <el-radio label="1">图片资源</el-radio>
+          <el-radio label="2">音频资源</el-radio>
+          <el-radio label="3">文本资源</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="货品分类" prop="category">
+        <el-select v-model="form.category" placeholder="请选择分类">
+          <el-option label="分类一" value="1"></el-option>
+          <el-option label="分类二" value="2"></el-option>
+        </el-select>
+      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" :loading="loading" @click.native.prevent="handleCreateTag">创建</el-button>
       </el-form-item>
@@ -19,11 +36,11 @@ import { createTag } from '@/api/goods'
 import { validateEmptyString } from '@/utils/validate'
 
 export default {
-  name: 'tagCreate',
+  name: 'goodCreate',
   data() {
     const validateTagName = (rule, value, callback) => {
       if (validateEmptyString(value)) {
-        callback(new Error('请输入正确的标签名，不允许空白字符出现'))
+        callback(new Error('请输入正确货品名称，不允许空白字符出现'))
       } else {
         callback()
       }
@@ -32,7 +49,9 @@ export default {
       loading: false,
       form: {
         name: '',
-        desc: ''
+        desc: '',
+        type: '2',
+        checked: true
       },
       rules: {
         name: [{ required: true, trigger: 'blur', validator: validateTagName }]

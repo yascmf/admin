@@ -56,11 +56,6 @@ export const constantRouterMap = [
         component: () => import('@/views/goods/tag/create')
       },
       {
-        path: 'tag/:id/edit',
-        hidden: true,
-        component: () => import('@/views/goods/tag/edit')
-      },
-      {
         path: 'good',
         name: 'Good',
         component: () => import('@/views/goods/good/index'),
