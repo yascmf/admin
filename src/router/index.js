@@ -41,20 +41,9 @@ export const constantRouterMap = [
     path: '/Goods',
     component: Layout,
     // redirect: '/goods/tag',
-    name: 'Goods',
+    name: 'goods',
     meta: { title: 'Goods', icon: 'commodity' },
     children: [
-      {
-        path: 'tag',
-        name: 'Tag',
-        component: () => import('@/views/goods/tag/index'),
-        meta: { title: 'Tag', icon: 'tag' }
-      },
-      {
-        path: 'tag/create',
-        hidden: true,
-        component: () => import('@/views/goods/tag/create')
-      },
       {
         path: 'good',
         name: 'Good',
@@ -63,6 +52,7 @@ export const constantRouterMap = [
       },
       {
         path: 'good/create',
+        name: 'GoodCreate',
         hidden: true,
         component: () => import('@/views/goods/good/create')
       },
@@ -70,6 +60,18 @@ export const constantRouterMap = [
         path: 'good/:id/edit',
         hidden: true,
         component: () => import('@/views/goods/good/edit')
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        component: () => import('@/views/goods/tag/index'),
+        meta: { title: 'Tag', icon: 'tag' }
+      },
+      {
+        path: 'tag/create',
+        name: 'TagCreate',
+        hidden: true,
+        component: () => import('@/views/goods/tag/create')
       }
     ]
   },

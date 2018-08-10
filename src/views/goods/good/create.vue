@@ -17,12 +17,6 @@
           <el-radio label="3">文本资源</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="货品分类" prop="category">
-        <el-select v-model="form.category" placeholder="请选择分类">
-          <el-option label="分类一" value="1"></el-option>
-          <el-option label="分类二" value="2"></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="货品标签" prop="tags">
         <el-select
           v-model="form.tags"
@@ -54,16 +48,40 @@
 
 <script>
 // import { createTag } from '@/api/goods'
-import { validateEmptyString } from '@/utils/validate'
+import { validateEmptyString, validateURL, validateEnum, validateStrLen } from '@/utils/validate'
 
 export default {
   name: 'goodCreate',
   data() {
-    const validateTagName = (rule, value, callback) => {
+    const validateGoodName = (rule, value, callback) => {
       if (validateEmptyString(value)) {
         callback(new Error('请输入正确货品名称，不允许空白字符出现'))
       } else {
         callback()
+      }
+    }
+    // 校验描述
+    const validateGoodDesc = (rule, value, callback) => {
+      if (validateStrLen(value, 6)) {
+        callback()
+      } else {
+        callback(new Error('货品描述不得少于6个字符'))
+      }
+    }
+    // 校验资源为 url
+    const validateGoodSource = (rule, value, callback) => {
+      if (validateURL(value)) {
+        callback()
+      } else {
+        callback(new Error('请输入正确的资源地址'))
+      }
+    }
+    // 校验枚举类型
+    const validateGoodSourceType = (rule, value, callback) => {
+      if (validateEnum(value, [1, 2, 3])) {
+        callback()
+      } else {
+        callback(new Error('请选择资源类型'))
       }
     }
     return {
@@ -85,10 +103,14 @@ export default {
         name: '',
         desc: '',
         type: '2',
-        tags: []
+        tags: [],
+        content: ''
       },
       rules: {
-        name: [{ required: true, trigger: 'blur', validator: validateTagName }]
+        name: [{ required: true, trigger: 'blur', validator: validateGoodName }],
+        desc: [{ required: true, trigger: 'blur', validator: validateGoodDesc }],
+        src: [{ required: true, trigger: 'blur', validator: validateGoodSource }],
+        type: [{ required: true, trigger: 'blur', validator: validateGoodSourceType }]
       }
     }
   },

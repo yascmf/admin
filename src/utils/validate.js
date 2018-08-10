@@ -1,6 +1,8 @@
 /**
  * Created by jiachenpan on 16/11/18.
  */
+import validator from 'validator'
+// see https://github.com/chriso/validator.js
 
 export function isvalidUsername(str) {
   const valid_map = ['admin', 'editor']
@@ -32,11 +34,45 @@ export function validatAlphabets(str) {
 }
 
 /**
- * 校验是否空字符
+ * check if the string is empty.
  *
- * @param string str
+ * @param {String} str
+ * @return {Boolean}
  */
 export function validateEmptyString(str) {
   const reg = /^\s*$/
   return (!str || str.length === 0 || reg.test(str))
+}
+
+/**
+ * check if the string is an email.
+ *
+ * @param {String} str
+ * @return {Boolean}
+ */
+export function validateEmail(str) {
+  return validator.isEmail(str)
+}
+
+/**
+ * check if the string is in a array of allowed values.
+ *
+ * @param {String} str
+ * @param {Array} values
+ * @return {Boolean}
+ */
+export function validateEnum(str, values) {
+  return validator.isIn(str, values)
+}
+
+/**
+ * check if the string's length falls in a range.
+ *
+ * @param {String} str
+ * @param {Number} min
+ * @param {Number} max
+ * @return {Boolean}
+ */
+export function validateStrLen(str, min = 0, max = undefined) {
+  return validator.isLength(str, { min: min, max: max })
 }
