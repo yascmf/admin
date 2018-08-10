@@ -23,16 +23,37 @@
           <el-option label="分类二" value="2"></el-option>
         </el-select>
       </el-form-item>
-
+      <el-form-item label="货品标签" prop="tags">
+        <el-select
+          v-model="form.tags"
+          multiple
+          :multiple-limit="5"
+          filterable
+          remote
+          :remote-method="remoteMethod"
+          :loading="loading"
+          default-first-option
+          placeholder="请搜索货品标签">
+          <el-option
+            v-for="item in stags"
+            :key="item.id"
+            :label="item.label"
+            :value="item.id">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="正文">
+        <el-input type="textarea" v-model="form.content"></el-input>
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="loading" @click.native.prevent="handleCreateTag">创建</el-button>
+        <el-button type="primary" :loading="loading" @click.native.prevent="handleCreateGood">创建</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { createTag } from '@/api/goods'
+// import { createTag } from '@/api/goods'
 import { validateEmptyString } from '@/utils/validate'
 
 export default {
@@ -47,28 +68,63 @@ export default {
     }
     return {
       loading: false,
+      limit: 10,
+      tags: [
+        {
+          id: '1',
+          label: '玄幻'
+        },
+        {
+          id: '2',
+          label: '言情'
+        }
+      ],
+      stags: [],
+      list: [],
       form: {
         name: '',
         desc: '',
         type: '2',
-        checked: true
+        tags: []
       },
       rules: {
         name: [{ required: true, trigger: 'blur', validator: validateTagName }]
       }
     }
   },
+  mounted() {
+    this.list = this.tags.map(item => {
+      return { id: item.id, label: item.label }
+    })
+  },
   methods: {
-    handleCreateTag() {
+    remoteMethod(query) {
+      if (query !== '') {
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+          this.stags = this.list.filter(item => {
+            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
+          })
+        }, 200)
+      } else {
+        this.stags = []
+      }
+    },
+    handleCreateGood() {
+      console.log(this.form)
       this.$refs.form.validate(valid => {
         if (valid) {
           this.loading = true
+
+          /*
           createTag(this.form.name, this.form.desc).then(response => {
             this.loading = false
             this.$router.push({ path: '/goods/tag' })
           }).catch(() => {
             this.loading = false
           })
+          */
         } else {
           console.log('error submit!!')
           return false
