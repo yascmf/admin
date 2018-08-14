@@ -1,6 +1,6 @@
 # admin
 
-> 基于 [`vueAdmin-template`](https://github.com/PanJiaChen/vueAdmin-template) 开发后台管理系统，`API` 后端使用 `Laravel/Lumen` 框架。
+> 本项目处于WIP开发进行中，代码特性未稳定，请勿下载使用。前端基于 [`vueAdmin-template`](https://github.com/PanJiaChen/vueAdmin-template) 开发后台管理系统，`API` 后端使用 `Laravel/Lumen` 框架，仓库地址 [yascmf/api](https://github.com/yascmf/api)。
 
 ### 安装与使用
 
@@ -16,4 +16,11 @@ npm run dev
 
 ### 二次开发
 
-需要开发者有一定的 `vue` 与 `element` 的能力。
+需要开发者有一定的 `Vue` 与 `ElementUI` 的开发能力。
+
+参考资源：
+
+- [Vue](https://cn.vuejs.org/index.html)
+- [ElementUI](http://element-cn.eleme.io/#/zh-CN)
+- [Vue-Router](https://router.vuejs.org/zh/)
+- [VueElementAdmin](https://panjiachen.github.io/vue-element-admin-site/zh/)
