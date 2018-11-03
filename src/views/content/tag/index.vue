@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { fetchTagList, updateTag, getTag } from '@/api/goods'
+import { fetchTagList, updateTag, getTag } from '@/api/content'
 import { validateEmptyString } from '@/utils/validate'
 
 export default {

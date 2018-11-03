@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /* ----- TAG START -----*/
 export function fetchTagList(query) {
   return request({
-    url: '/goods/tag',
+    url: '/tag',
     method: 'get',
     params: query // page limit
   })
@@ -11,7 +11,7 @@ export function fetchTagList(query) {
 
 export function createTag(name, desc) {
   return request({
-    url: '/goods/tag/create',
+    url: '/tag/create',
     method: 'post',
     data: {
       name,
@@ -22,14 +22,14 @@ export function createTag(name, desc) {
 
 export function getTag(id) {
   return request({
-    url: '/goods/tag/' + id,
+    url: '/tag/' + id,
     method: 'get'
   })
 }
 
 export function updateTag(id, name, desc) {
   return request({
-    url: '/goods/tag/' + id,
+    url: '/tag/' + id,
     method: 'put',
     data: {
       name,
@@ -39,18 +39,18 @@ export function updateTag(id, name, desc) {
 }
 /* ----- TAG END -----*/
 
-/* ----- GOOD START -----*/
-export function fetchGoodList(query) {
+/* ----- Article START -----*/
+export function fetchArticleList(query) {
   return request({
-    url: '/goods/good',
+    url: '/article',
     method: 'get',
     params: query // page limit
   })
 }
 
-export function createGood(name, desc) {
+export function createArticle(name, desc) {
   return request({
-    url: '/goods/good/create',
+    url: '/article/create',
     method: 'post',
     data: {
       name,
@@ -59,16 +59,16 @@ export function createGood(name, desc) {
   })
 }
 
-export function getGood(id) {
+export function getArticle(id) {
   return request({
-    url: '/goods/good/' + id,
+    url: '/article/' + id,
     method: 'get'
   })
 }
 
-export function updateGood(id, name, desc) {
+export function updateArticle(id, name, desc) {
   return request({
-    url: '/goods/tag/' + id,
+    url: '/article/' + id,
     method: 'put',
     data: {
       name,
@@ -76,4 +76,4 @@ export function updateGood(id, name, desc) {
     }
   })
 }
-/* ----- GOOD END -----*/
+/* ----- Article END -----*/

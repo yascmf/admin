@@ -3,7 +3,7 @@
 
     <div class="resource-operation">
       <el-row>
-          <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="tagNew">新增货品</el-button>
+          <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="tagNew">撰写新文章</el-button>
       </el-row>
     </div>
 
@@ -14,39 +14,41 @@
         </template>
       </el-table-column>
 
+
+
+      <el-table-column width="100px" label="推荐位">
+        <template slot-scope="scope">
+          <span>{{scope.row.flag}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="120px" align="center" label="标题">
+        <template slot-scope="scope">
+          <span>{{scope.row.title}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="100px" label="slug">
+        <template slot-scope="scope">
+          <span>{{scope.row.slug}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="100px" label="分类">
+        <template slot-scope="scope">
+          <span>{{scope.row.cid}}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="scope">
           <span>{{scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="120px" align="center" label="名称">
-        <template slot-scope="scope">
-          <span>{{scope.row.name}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="描述">
-        <template slot-scope="scope">
-          <span>{{scope.row.desc}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="资源路径">
-        <template slot-scope="scope">
-          <span>{{scope.row.src}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="分类">
-        <template slot-scope="scope">
-          <span>{{scope.row.category_id}}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">
-          <router-link :to="'/Goods/tag/'+scope.row.id+'/edit'">
+          <router-link :to="'/content/article/'+scope.row.id+'/edit'">
             <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
@@ -63,10 +65,10 @@
 </template>
 
 <script>
-import { fetchGoodList } from '@/api/goods'
+import { fetchArticleList } from '@/api/content'
 
 export default {
-  name: 'goodList',
+  name: 'articleList',
   data() {
     return {
       list: null,
@@ -94,7 +96,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      fetchGoodList(this.listQuery).then(response => {
+      fetchArticleList(this.listQuery).then(response => {
         this.list = response.data.items
         this.total = response.data.total
         this.listLoading = false
@@ -109,7 +111,7 @@ export default {
       this.getList()
     },
     tagNew() {
-      this.$router.push({ path: '/Goods/good/create' })
+      this.$router.push({ path: '/content/article/create' })
     }
   }
 }

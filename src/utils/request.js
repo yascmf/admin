@@ -12,7 +12,7 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(config => {
   if (store.getters.token) {
-    config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
   }
   return config
 }, error => {
@@ -24,38 +24,67 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
   response => {
-  /**
-  * code为非20000是抛错 可结合自己业务进行修改
-  */
-    const res = response.data
-    if (res.code !== 20000) {
-      Message({
-        message: res.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
-
-      // 500008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('FedLogOut').then(() => {
-            location.reload()// 为了重新实例化vue-router对象 避免bug
-          })
-        })
-      }
-      return Promise.reject('error')
-    } else {
-      return response.data
-    }
+    return response
   },
   error => {
-    console.log('err' + error)// for debug
+    var message = ''
+    if (error && error.response) {
+      switch (error.response.status) {
+        case 400:
+          message = '请求错误(400)'
+          break
+        case 401:
+          message = '未授权，请重新登录(401)'
+          break
+        case 403:
+          message = '拒绝访问(403)'
+          break
+        case 404:
+          message = '请求出错(404)'
+          break
+        case 408:
+          message = '请求超时(408)'
+          break
+        case 500:
+          message = '服务器错误(500)'
+          break
+        case 501:
+          message = '服务未实现(501)'
+          break
+        case 502:
+          message = '网络错误(502)'
+          break
+        case 503:
+          message = '服务不可用(503)'
+          break
+        case 504:
+          message = '网络超时(504)'
+          break
+        case 505:
+          message = 'HTTP版本不受支持(505)'
+          break
+        default:
+          message = `连接出错(${error.response.status})!`
+          break
+      }
+    } else {
+      message = '连接服务器失败!'
+    }
+    var res = error.response.data
+    // 40003: token 过期
+    if (res.code === 40003) {
+      MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('FedLogOut').then(() => {
+          location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
+      })
+    }
     Message({
-      message: error.message,
+      message: res.message || message,
       type: 'error',
       duration: 5 * 1000
     })

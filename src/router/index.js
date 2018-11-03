@@ -38,44 +38,49 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/Goods',
+    path: '/form',
     component: Layout,
-    // redirect: '/goods/tag',
-    name: 'goods',
-    meta: { title: 'Goods', icon: 'commodity' },
     children: [
       {
-        path: 'good',
-        name: 'Good',
-        component: () => import('@/views/goods/good/index'),
-        meta: { title: 'Good', icon: 'commodity' }
-      },
-      {
-        path: 'good/create',
-        name: 'GoodCreate',
-        hidden: true,
-        component: () => import('@/views/goods/good/create')
-      },
-      {
-        path: 'good/:id/edit',
-        hidden: true,
-        component: () => import('@/views/goods/good/edit')
-      },
-      {
-        path: 'tag',
-        name: 'Tag',
-        component: () => import('@/views/goods/tag/index'),
-        meta: { title: 'Tag', icon: 'tag' }
-      },
-      {
-        path: 'tag/create',
-        name: 'TagCreate',
-        hidden: true,
-        component: () => import('@/views/goods/tag/create')
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: '表单示例', icon: 'form' }
       }
     ]
   },
 
+  {
+    path: '/content',
+    component: Layout,
+    name: 'content',
+    meta: { title: '内容管理', icon: 'commodity' },
+    children: [
+      {
+        path: 'article',
+        name: 'Article',
+        component: () => import('@/views/content/article/index'),
+        meta: { title: '文章', icon: 'commodity' }
+      },
+      {
+        path: 'article/create',
+        hidden: true,
+        component: () => import('@/views/content/article/create')
+      },
+      {
+        path: 'article/:id/edit',
+        hidden: true,
+        component: () => import('@/views/content/article/edit')
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        component: () => import('@/views/content/tag/index'),
+        meta: { title: '标签', icon: 'tag' }
+      }
+    ]
+  },
+  /*
   {
     path: '/example',
     component: Layout,
@@ -97,20 +102,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
   {
     path: '/nested',
     component: Layout,
@@ -168,6 +159,7 @@ export const constantRouterMap = [
       }
     ]
   },
+  */
 
   { path: '*', redirect: '/404', hidden: true }
 ]
