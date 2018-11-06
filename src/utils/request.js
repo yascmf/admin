@@ -24,7 +24,7 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
   response => {
-    return response
+    return response.data
   },
   error => {
     var message = ''
@@ -78,7 +78,7 @@ service.interceptors.response.use(
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        store.dispatch('FedLogOut').then(() => {
+        store.dispatch('FrontLogOut').then(() => {
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
       })

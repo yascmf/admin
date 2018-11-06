@@ -97,8 +97,9 @@ export default {
     getList() {
       this.listLoading = true
       fetchArticleList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
+        console.log(response)
+        this.list = response.items
+        this.total = response.total
         this.listLoading = false
       })
     },
