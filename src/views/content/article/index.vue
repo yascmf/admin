@@ -76,7 +76,7 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 10
+        page_size: 15
       }
     }
   },
