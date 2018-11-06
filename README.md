@@ -1,6 +1,6 @@
 # admin
 
-> 本项目处于WIP开发进行中，代码特性未稳定，请勿下载使用。前端基于 [`vueAdmin-template`](https://github.com/PanJiaChen/vueAdmin-template) 开发后台管理系统，`API` 后端使用 `Laravel/Lumen` 框架，仓库地址 [yascmf/api](https://github.com/yascmf/api)。
+> 本项目处于WIP开发进行中，代码特性未稳定，请勿下载使用。前端基于 [`vueAdmin-template`](https://github.com/PanJiaChen/vueAdmin-template) 开发的业务管理系统，`API` 后端使用 `Laravel/Lumen` 框架，仓库地址 [yascmf/api](https://github.com/yascmf/api)。
 
 ### 安装与使用
 
