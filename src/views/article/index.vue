@@ -6,7 +6,7 @@
 import FastAdminIndex from '@/components/FastAdmin/Index'
 
 export default {
-  name: 'Test',
+  name: 'ArticleList',
   components: {
     FastAdminIndex
   },
