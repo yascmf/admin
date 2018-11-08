@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { createTag } from '@/api/goods'
 import { validateEmptyString } from '@/utils/validate'
 
 export default {
