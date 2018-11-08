@@ -51,13 +51,13 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/testing',
+    path: '/test',
     component: Layout,
     children: [
       {
-        path: 'testing',
-        name: 'Form',
-        component: () => import('@/components/FastAdmin/index'),
+        path: 'test',
+        name: 'Test',
+        component: () => import('@/views/content/article/test'),
         meta: { title: '测试', icon: 'form' }
       }
     ]

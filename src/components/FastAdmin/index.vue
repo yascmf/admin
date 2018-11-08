@@ -1,30 +1,29 @@
 <template>
   <div class="app-container">
-
     <div class="resource-operation">
       <el-row>
-          <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="moduleCreate">创建</el-button>
+        <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="moduleCreate">创建</el-button>
       </el-row>
     </div>
-
     <el-table :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
-      <div v-for="(value, key) in labels" v-bind:key="key">
-        <el-table-column align="center" label="{{value}}" width="100px">
-          <template slot-scope="scope">
-            <span>{{scope.row.key}}</span>
-          </template>
-        </el-table-column>
-      </div>
-
+      <el-table-column align="center" label="ID" width="100px">
+        <template slot-scope="scope">
+          <span>{{scope.row.id}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column v-for="(value, key) in labels" :key="key" align="center" :label="value" width="100px">
+        <template slot-scope="scope">
+          <span>{{scope.row[key]}}</span>
+        </template>
+      </el-table-column>
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="scope">
           <span>{{scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
-
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">
-          <router-link :to="'/content/article/'+scope.row.id+'/edit'">
+          <router-link :to="'/'+ module + '/' + scope.row.id + '/edit'">
             <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
@@ -41,19 +40,17 @@
 </template>
 
 <script>
+import { resourceIndex } from '@/api/rest'
+
 export default {
-  name: 'fast-admin-index',
-  data () {
+  name: 'FastAdminIndex',
+  props: {
+    module: String,
+    labels: Object
+  },
+  data() {
     return {
-      module: '',
-      labels: {
-        id: 'ID',
-        flag: '推荐位',
-        slug: '标识符',
-        cid: '分类',
-        created_at: '创建时间'
-      },
-      items: [],
+      list: [],
       total: 0,
       listLoading: true,
       listQuery: {
@@ -62,10 +59,14 @@ export default {
       }
     }
   },
+  created() {
+    console.log(this.labels)
+    this.getList()
+  },
   methods: {
     getList() {
       this.listLoading = true
-      fetchArticleList(this.listQuery).then(response => {
+      resourceIndex(this.module, this.listQuery).then(response => {
         console.log(response)
         this.list = response.items
         this.total = response.total
@@ -73,15 +74,15 @@ export default {
       })
     },
     handleSizeChange(val) {
-      this.listQuery.limit = val
-      // this.getList()
+      this.listQuery.page_size = val
+      this.getList()
     },
     handleCurrentChange(val) {
       this.listQuery.page = val
-      // this.getList()
+      this.getList()
     },
-    moduleCreate () {
-      // this.$router.push({ path: '/content/article/create' })
+    moduleCreate() {
+      this.$router.push({ path: '/' + this.module + '/create' })
     }
   }
 }
