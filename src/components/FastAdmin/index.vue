@@ -8,36 +8,13 @@
     </div>
 
     <el-table :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
-
-      <el-table-column align="center" label="{{labels[scope.row.id]}}" width="80">
-        <template slot-scope="scope">
-          <span>{{scope.row.id}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="推荐位">
-        <template slot-scope="scope">
-          <span>{{scope.row.flag}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="120px" align="center" label="标题">
-        <template slot-scope="scope">
-          <span>{{scope.row.title}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="slug">
-        <template slot-scope="scope">
-          <span>{{scope.row.slug}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="分类">
-        <template slot-scope="scope">
-          <span>{{scope.row.cid}}</span>
-        </template>
-      </el-table-column>
+      <div v-for="(value, key) in labels" v-bind:key="key">
+        <el-table-column align="center" label="{{value}}" width="100px">
+          <template slot-scope="scope">
+            <span>{{scope.row.key}}</span>
+          </template>
+        </el-table-column>
+      </div>
 
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="scope">
@@ -64,14 +41,18 @@
 </template>
 
 <script>
-import { fetchArticleList } from '@/api/content'
-
 export default {
   name: 'fast-admin-index',
   data () {
     return {
       module: '',
-      labels: [],
+      labels: {
+        id: 'ID',
+        flag: '推荐位',
+        slug: '标识符',
+        cid: '分类',
+        created_at: '创建时间'
+      },
       items: [],
       total: 0,
       listLoading: true,
@@ -80,19 +61,6 @@ export default {
         page_size: 15
       }
     }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
-  created() {
-    this.getList()
   },
   methods: {
     getList() {
@@ -106,14 +74,14 @@ export default {
     },
     handleSizeChange(val) {
       this.listQuery.limit = val
-      this.getList()
+      // this.getList()
     },
     handleCurrentChange(val) {
       this.listQuery.page = val
-      this.getList()
+      // this.getList()
     },
-    tagNew() {
-      this.$router.push({ path: '/content/article/create' })
+    moduleCreate () {
+      // this.$router.push({ path: '/content/article/create' })
     }
   }
 }
