@@ -77,6 +77,12 @@ export const constantRouterMap = [
         name: 'Tag',
         component: () => import('@/views/tag/index'),
         meta: { title: '标签', icon: 'tag' }
+      },
+      {
+        path: 'category',
+        name: 'Category',
+        component: () => import('@/views/category/index'),
+        meta: { title: '分类', icon: 'tag' }
       }
     ]
   },
