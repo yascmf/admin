@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FastAdminIndex from '@/components/FastAdmin/Index'
+import FastAdminIndex from '@/components/FastAdmin/index'
 
 export default {
   name: 'CategoryList',

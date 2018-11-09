@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FastAdminIndex from '@/components/FastAdmin/Index'
+import FastAdminIndex from '@/components/FastAdmin/index'
 
 export default {
   name: 'ArticleList',
@@ -17,6 +17,18 @@ export default {
         flag: '推荐位',
         slug: '标识符',
         cid: '分类'
+      },
+      attributes: {
+        flag: {
+          displayAs: 'el-tag',
+          cast: function (flag) {
+            return ''
+          }
+        },
+        cid: {
+          displayAs: 'text',
+          cast: "['category']['name']"
+        },
       }
     }
   },
