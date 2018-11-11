@@ -32,7 +32,7 @@
           <span>{{form[key]}}</span>
         </template>
       </div>
-      <slot name="fieldsSolt"></slot>
+      <slot name="fieldsSlot"></slot>
       <el-form-item>
         <el-button type="primary" :loading="loading" @click.native.prevent="handleUpdateResource">更新</el-button>
       </el-form-item>

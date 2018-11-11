@@ -1,10 +1,16 @@
 <template>
-  <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath"></FastAdminCreate>
+  <div>
+    <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath"></FastAdminCreate>
+  </div>
 </template>
 
 <script>
 import FastAdminCreate from '@/components/FastAdmin/create'
 import config from './config.js'
+
+const content = `
+> writing markdown by [Simplemde](https://github.com/sparksuite/simplemde-markdown-editor) .
+`
 
 export default {
   name: 'ArticleCreate',
@@ -21,7 +27,8 @@ export default {
         cid: null,
         flag: [],
         is_top: 0,
-        description: ''
+        description: '',
+        content: content
       },
       attributes: {}
     }

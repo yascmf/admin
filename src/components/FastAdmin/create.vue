@@ -28,11 +28,25 @@
             </el-radio-group>
           </el-form-item>
         </template>
+        <template v-else-if="attribute.displayAs === 'markdownEditor'">
+          <el-form-item :label="attribute.label">
+            <div class="editor-container">
+              <markdown-editor id="contentEditor" v-model="form[key]" :height="300" :z-index="20"/>
+            </div>
+          </el-form-item>
+        </template>
+        <template v-else-if="attribute.displayAs === 'richEditor'">
+          <el-form-item :label="attribute.label">
+            <div>
+              <tinymce :height="300" v-model="form[key]"/>
+            </div>
+          </el-form-item>
+        </template>
         <template v-else>
           <span>{{form[key]}}</span>
         </template>
       </div>
-      <slot name="fieldsSolt"></slot>
+      <slot name="fieldsSlot"></slot>
       <el-form-item>
         <el-button type="primary" :loading="loading" @click.native.prevent="handleStoreResource">创建</el-button>
       </el-form-item>
@@ -42,9 +56,15 @@
 
 <script>
 import { resourceStore } from '@/api/rest'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import Tinymce from '@/components/Tinymce'
 
 export default {
   name: 'FastAdminCreate',
+  components: {
+    MarkdownEditor,
+    Tinymce
+  },
   props: {
     module: String,
     basePath: String,
@@ -56,6 +76,9 @@ export default {
     return {
       loading: false
     }
+  },
+  created() {
+
   },
   methods: {
     handleStoreResource() {

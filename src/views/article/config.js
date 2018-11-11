@@ -25,7 +25,8 @@ export default {
     cid: null,
     flag: [],
     is_top: 0,
-    description: ''
+    description: '',
+    content: ''
   },
   attributes: {
     title: {
@@ -88,10 +89,18 @@ export default {
       type: 'textarea',
       placeholder: '请输入文章摘要'
     },
+    /*
     content: {
       label: '正文(*)',
-      displayAs: 'input',
-      type: 'textarea',
+      displayAs: 'markdownEditor',
+      poweredBy: 'Simplemde',
+      placeholder: '请输入文章正文'
+    }
+    */
+    content: {
+      label: '正文(*)',
+      displayAs: 'richEditor',
+      poweredBy: 'Tinymce',
       placeholder: '请输入文章正文'
     }
   }
