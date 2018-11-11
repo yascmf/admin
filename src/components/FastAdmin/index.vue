@@ -13,8 +13,8 @@
       </el-table-column>
       <el-table-column v-for="(value, key) in labels" :key="key" align="center" :label="value" width="150px">
         <template slot-scope="scope">
-          <template v-if="attributes.hasOwnProperty(key)">
-            <div v-html="attributes[key](scope.row)" style="display:inline;"></div>
+          <template v-if="castAttributes.hasOwnProperty(key)">
+            <div v-html="castAttributes[key](scope.row)" style="display:inline;"></div>
           </template>
           <template slot-scope="scope" v-else>
             <span>{{scope.row[key]}}</span>
@@ -53,7 +53,7 @@ export default {
     module: String,
     basePath: String,
     labels: Object,
-    attributes: Object
+    castAttributes: Object
   },
   data() {
     return {

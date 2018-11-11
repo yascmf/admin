@@ -1,9 +1,10 @@
 <template>
-  <FastAdminIndex :labels="labels" :module="module" :attributes="attributes" :basePath="basePath"></FastAdminIndex>
+  <FastAdminIndex :labels="labels" :module="module" :castAttributes="castAttributes" :basePath="basePath"></FastAdminIndex>
 </template>
 
 <script>
 import FastAdminIndex from '@/components/FastAdmin/index'
+import config from './config.js'
 
 export default {
   name: 'ArticleIndex',
@@ -19,29 +20,7 @@ export default {
         slug: '标识符',
         cid: '分类'
       },
-      attributes: {
-        flag: function(row) {
-          const flagArray = row.flag
-          var displayStr = ''
-          flagArray.forEach(function(value, key) {
-            displayStr = displayStr + '<span class="el-tag" style="margin-right:5px">' + value + '</span>'
-          })
-          return displayStr
-        },
-        cid: function(row) {
-          return row.category.name
-        }
-      }
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+      castAttributes: config.castAttributes
     }
   }
 }

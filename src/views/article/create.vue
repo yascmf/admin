@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       module: 'article',
-      basePath: '',
+      basePath: '/content-management/',
       form: {
         title: '',
         slug: '',
@@ -27,7 +27,6 @@ export default {
     }
   },
   mounted() {
-    this.basePath = config.basePath
     this.attributes = config.attributes
   },
   methods: {

@@ -1,6 +1,24 @@
 export default {
   module: 'article',
   basePath: '/content-management/',
+  labels: {
+    flag: '推荐位',
+    slug: '标识符',
+    cid: '分类'
+  },
+  castAttributes: {
+    flag: function(row) {
+      const flagArray = row.flag
+      var displayStr = ''
+      flagArray.forEach(function(value, key) {
+        displayStr = displayStr + '<span class="el-tag" style="margin-right:5px">' + value + '</span>'
+      })
+      return displayStr
+    },
+    cid: function(row) {
+      return row.category.name
+    }
+  },
   form: {
     title: '',
     slug: '',

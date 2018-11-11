@@ -7,13 +7,13 @@ import FastAdminEdit from '@/components/FastAdmin/edit'
 import config from './config.js'
 
 export default {
-  name: 'ArticleEdit',
+  name: 'CategoryEdit',
   components: {
     FastAdminEdit
   },
   data() {
     return {
-      module: 'article',
+      module: 'category',
       basePath: '/content-management/',
       resourceId: this.$route.params && this.$route.params.id,
       attributes: {}

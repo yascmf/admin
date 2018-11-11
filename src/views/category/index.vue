@@ -1,9 +1,10 @@
 <template>
-  <FastAdminIndex :labels="labels" :module="module"></FastAdminIndex>
+  <FastAdminIndex :labels="labels" :module="module" :castAttributes="castAttributes" :basePath="basePath"></FastAdminIndex>
 </template>
 
 <script>
 import FastAdminIndex from '@/components/FastAdmin/index'
+import config from './config.js'
 
 export default {
   name: 'CategoryList',
@@ -13,21 +14,13 @@ export default {
   data() {
     return {
       module: 'category',
+      basePath: '/content-management/',
       labels: {
         name: '名称',
         slug: '标识符',
         sort: '排序'
-      }
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+      },
+      castAttributes: config.castAttributes
     }
   }
 }

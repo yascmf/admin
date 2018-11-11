@@ -1,21 +1,25 @@
 <template>
-  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId"></FastAdminEdit>
+  <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath"></FastAdminCreate>
 </template>
 
 <script>
-import FastAdminEdit from '@/components/FastAdmin/edit'
+import FastAdminCreate from '@/components/FastAdmin/create'
 import config from './config.js'
 
 export default {
-  name: 'ArticleEdit',
+  name: 'CategoryCreate',
   components: {
-    FastAdminEdit
+    FastAdminCreate
   },
   data() {
     return {
-      module: 'article',
+      module: 'category',
       basePath: '/content-management/',
-      resourceId: this.$route.params && this.$route.params.id,
+      form: {
+        name: '',
+        slug: '',
+        sort: 999
+      },
       attributes: {}
     }
   },
