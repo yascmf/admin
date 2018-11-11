@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.form)
       this.$message('submit!')
     },
     onCancel() {

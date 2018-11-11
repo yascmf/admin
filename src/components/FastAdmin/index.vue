@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="resource-operation">
       <el-row>
-        <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="moduleCreate">创建</el-button>
+        <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="resourceCreateRouter">创建</el-button>
       </el-row>
     </div>
     <el-table :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
@@ -11,9 +11,14 @@
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
-      <el-table-column v-for="(value, key) in labels" :key="key" align="center" :label="value" width="100px">
+      <el-table-column v-for="(value, key) in labels" :key="key" align="center" :label="value" width="150px">
         <template slot-scope="scope">
-          <span>{{scope.row[key]}}</span>
+          <template v-if="attributes.hasOwnProperty(key)">
+            <div v-html="attributes[key](scope.row)" style="display:inline;"></div>
+          </template>
+          <template slot-scope="scope" v-else>
+            <span>{{scope.row[key]}}</span>
+          </template>
         </template>
       </el-table-column>
       <el-table-column width="180px" align="center" label="创建时间">
@@ -23,7 +28,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">
-          <router-link :to="'/'+ module + '/' + scope.row.id + '/edit'">
+          <router-link :to="basePath + module + '/' + scope.row.id + '/edit'">
             <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
@@ -32,7 +37,7 @@
 
     <div class="pagination-container">
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page"
-        :page-sizes="[10,20,30,50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        :page-sizes="[10,20,30,50]" :page-size="listQuery.page_size" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
 
@@ -46,7 +51,9 @@ export default {
   name: 'FastAdminIndex',
   props: {
     module: String,
-    labels: Object
+    basePath: String,
+    labels: Object,
+    attributes: Object
   },
   data() {
     return {
@@ -81,8 +88,8 @@ export default {
       this.listQuery.page = val
       this.getList()
     },
-    moduleCreate() {
-      this.$router.push({ path: '/' + this.module + '/create' })
+    resourceCreateRouter() {
+      this.$router.push({ path: this.basePath + this.module + '/create' })
     }
   }
 }

@@ -1,34 +1,36 @@
 <template>
-  <FastAdminIndex :labels="labels" :module="module"></FastAdminIndex>
+  <FastAdminIndex :labels="labels" :module="module" :attributes="attributes" :basePath="basePath"></FastAdminIndex>
 </template>
 
 <script>
 import FastAdminIndex from '@/components/FastAdmin/index'
 
 export default {
-  name: 'ArticleList',
+  name: 'ArticleIndex',
   components: {
     FastAdminIndex
   },
   data() {
     return {
       module: 'article',
+      basePath: '/content-management/',
       labels: {
         flag: '推荐位',
         slug: '标识符',
         cid: '分类'
       },
       attributes: {
-        flag: {
-          displayAs: 'el-tag',
-          cast: function (flag) {
-            return ''
-          }
+        flag: function(row) {
+          const flagArray = row.flag
+          var displayStr = ''
+          flagArray.forEach(function(value, key) {
+            displayStr = displayStr + '<span class="el-tag" style="margin-right:5px">' + value + '</span>'
+          })
+          return displayStr
         },
-        cid: {
-          displayAs: 'text',
-          cast: "['category']['name']"
-        },
+        cid: function(row) {
+          return row.category.name
+        }
       }
     }
   },

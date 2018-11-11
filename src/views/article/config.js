@@ -1,0 +1,80 @@
+export default {
+  module: 'article',
+  basePath: '/content-management/',
+  form: {
+    title: '',
+    slug: '',
+    cid: null,
+    flag: [],
+    is_top: 0,
+    description: ''
+  },
+  attributes: {
+    title: {
+      label: '标题(*)',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请输入文章标题'
+    },
+    slug: {
+      label: '标识符(*)',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请输入文章标识符'
+    },
+    cid: {
+      label: '分类(*)',
+      displayAs: 'select',
+      options: [
+        {
+          label: 'Shanghai,China',
+          value: 'Shanghai'
+        },
+        {
+          label: 'Beijing,China',
+          value: 'Beijing'
+        }
+      ],
+      placeholder: '请选择文章分类'
+    },
+    flag: {
+      label: '推荐位',
+      displayAs: 'checkbox',
+      options: [
+        {
+          label: 'h'
+        },
+        {
+          label: 't'
+        }
+      ]
+    },
+    is_top: {
+      label: '是否置顶',
+      displayAs: 'radio',
+      options: [
+        {
+          label: 0,
+          value: '否'
+        },
+        {
+          label: 1,
+          value: '是'
+        }
+      ],
+      placeholder: '请选择文章是否置顶'
+    },
+    description: {
+      label: '摘要(*)',
+      displayAs: 'input',
+      type: 'textarea',
+      placeholder: '请输入文章摘要'
+    },
+    content: {
+      label: '正文(*)',
+      displayAs: 'input',
+      type: 'textarea',
+      placeholder: '请输入文章正文'
+    }
+  }
+}
