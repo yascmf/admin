@@ -4,6 +4,7 @@
 
 <script>
 import FastAdminEdit from '@/components/FastAdmin/edit'
+import { resourceIndex } from '@/api/rest'
 import config from './config.js'
 
 export default {
@@ -21,6 +22,28 @@ export default {
   },
   mounted() {
     this.attributes = config.attributes
+  },
+  created() {
+    this.attributes = config.attributes
+    const query = {
+      page: 1,
+      page_size: 9999
+    }
+    resourceIndex('category', query).then(response => {
+      console.log(response)
+      const categories = response.items
+      const options = []
+      categories.forEach((category, index) => {
+        console.log(category)
+        options.push({
+          label: category.name,
+          value: category.id
+        })
+      })
+      this.attributes.cid.options = options
+      console.log(options)
+      console.log(this.attributes)
+    })
   },
   methods: {
   }

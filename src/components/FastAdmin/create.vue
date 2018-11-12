@@ -10,20 +10,23 @@
         <template v-else-if="attribute.displayAs === 'select'">
           <el-form-item :label="attribute.label">
             <el-select v-model="form[key]" :placeholder="attribute.placeholder">
-              <el-option v-for="option in attribute.options" :key="option.label" :label="option.label" :value="option.value"></el-option>
+              <!--option.value is value to submit-->
+              <el-option v-for="option in attribute.options" :key="option.value" :label="option.label" :value="option.value"></el-option>
             </el-select>
           </el-form-item>
         </template>
         <template v-else-if="attribute.displayAs === 'checkbox'">
           <el-form-item :label="attribute.label">
             <el-checkbox-group v-model="form[key]">
-              <el-checkbox v-for="option in attribute.options" :key="option.label" :label="option.label" :name="key"></el-checkbox>
+              <!--option.label is value to submit-->
+              <el-checkbox v-for="option in attribute.options" :key="option.label" :label="option.label" :name="key">{{option.value}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </template>
         <template v-else-if="attribute.displayAs === 'radio'">
           <el-form-item :label="attribute.label">
             <el-radio-group v-model="form[key]">
+              <!--option.label is value to submit-->
               <el-radio v-for="option in attribute.options" :key="option.label" :label="option.label">{{option.value}}</el-radio>
             </el-radio-group>
           </el-form-item>
@@ -37,9 +40,7 @@
         </template>
         <template v-else-if="attribute.displayAs === 'richEditor'">
           <el-form-item :label="attribute.label">
-            <div>
-              <tinymce :height="300" v-model="form[key]"/>
-            </div>
+            <tinymce ref="editor" :height="300" v-model="form[key]"/>
           </el-form-item>
         </template>
         <template v-else>

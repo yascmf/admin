@@ -24,7 +24,6 @@ export default {
     slug: '',
     cid: null,
     flag: [],
-    is_top: 0,
     description: '',
     content: ''
   },
@@ -46,12 +45,8 @@ export default {
       displayAs: 'select',
       options: [
         {
-          label: 'Shanghai,China',
-          value: 'Shanghai'
-        },
-        {
-          label: 'Beijing,China',
-          value: 'Beijing'
+          label: '默认',
+          value: '1'
         }
       ],
       placeholder: '请选择文章分类'
@@ -61,13 +56,28 @@ export default {
       displayAs: 'checkbox',
       options: [
         {
-          label: 'h'
+          label: 'l',
+          value: '链接'
         },
         {
-          label: 't'
+          label: 'f',
+          value: '幻灯'
+        },
+        {
+          label: 's',
+          value: '滚动'
+        },
+        {
+          label: 'h',
+          value: '热门'
+        },
+        {
+          label: 't',
+          value: '置顶'
         }
       ]
     },
+    /*
     is_top: {
       label: '是否置顶',
       displayAs: 'radio',
@@ -83,6 +93,7 @@ export default {
       ],
       placeholder: '请选择文章是否置顶'
     },
+    */
     description: {
       label: '摘要(*)',
       displayAs: 'input',

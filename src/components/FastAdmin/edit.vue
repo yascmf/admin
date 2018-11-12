@@ -17,7 +17,7 @@
         <template v-else-if="attribute.displayAs === 'checkbox'">
           <el-form-item :label="attribute.label">
             <el-checkbox-group v-model="form[key]">
-              <el-checkbox v-for="option in attribute.options" :key="option.label" :label="option.label" :name="key"></el-checkbox>
+              <el-checkbox v-for="option in attribute.options" :key="option.label" :label="option.label" :name="key">{{option.value}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </template>
@@ -26,6 +26,18 @@
             <el-radio-group v-model="form[key]">
               <el-radio v-for="option in attribute.options" :key="option.label" :label="option.label">{{option.value}}</el-radio>
             </el-radio-group>
+          </el-form-item>
+        </template>
+        <template v-else-if="attribute.displayAs === 'markdownEditor'">
+          <el-form-item :label="attribute.label">
+            <div class="editor-container">
+              <markdown-editor id="contentEditor" v-model="form[key]" :height="300" :z-index="20"/>
+            </div>
+          </el-form-item>
+        </template>
+        <template v-else-if="attribute.displayAs === 'richEditor'">
+          <el-form-item :label="attribute.label">
+            <tinymce ref="editor" :height="300" v-model="form[key]"/>
           </el-form-item>
         </template>
         <template v-else>
@@ -42,9 +54,15 @@
 
 <script>
 import { resourceShow, resourceUpdate } from '@/api/rest'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import Tinymce from '@/components/Tinymce'
 
 export default {
   name: 'FastAdminEdit',
+  components: {
+    MarkdownEditor,
+    Tinymce
+  },
   props: {
     module: String,
     basePath: String,

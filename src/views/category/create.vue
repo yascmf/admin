@@ -1,5 +1,9 @@
 <template>
-  <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath"></FastAdminCreate>
+  <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath">
+    <template slot="fieldsSlot">
+    </template>
+  </FastAdminCreate>
+
 </template>
 
 <script>

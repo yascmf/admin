@@ -6,7 +6,9 @@
 
 <script>
 import FastAdminCreate from '@/components/FastAdmin/create'
+import { resourceIndex } from '@/api/rest'
 import config from './config.js'
+import uuid from 'uuid'
 
 const content = `
 > writing markdown by [Simplemde](https://github.com/sparksuite/simplemde-markdown-editor) .
@@ -26,7 +28,6 @@ export default {
         slug: '',
         cid: null,
         flag: [],
-        is_top: 0,
         description: '',
         content: content
       },
@@ -34,7 +35,29 @@ export default {
     }
   },
   mounted() {
+  },
+  created() {
+    this.form.slug = uuid.v4()
     this.attributes = config.attributes
+    const query = {
+      page: 1,
+      page_size: 9999
+    }
+    resourceIndex('category', query).then(response => {
+      console.log(response)
+      const categories = response.items
+      const options = []
+      categories.forEach((category, index) => {
+        console.log(category)
+        options.push({
+          label: category.name,
+          value: category.id
+        })
+      })
+      this.attributes.cid.options = options
+      console.log(options)
+      console.log(this.attributes)
+    })
   },
   methods: {
   }

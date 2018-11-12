@@ -1,28 +1,21 @@
 <template>
-  <FastAdminCreate :module="module" :attributes="attributes" :form="form" :basePath="basePath">
-    <template slot="fieldsSlot">
-    </template>
-  </FastAdminCreate>
-
+  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId"></FastAdminEdit>
 </template>
 
 <script>
-import FastAdminCreate from '@/components/FastAdmin/create'
+import FastAdminEdit from '@/components/FastAdmin/edit'
 import config from './config.js'
 
 export default {
-  name: 'TagCreate',
+  name: 'TagEdit',
   components: {
-    FastAdminCreate
+    FastAdminEdit
   },
   data() {
     return {
       module: 'tag',
       basePath: '/content-management/',
-      form: {
-        name: '',
-        description: ''
-      },
+      resourceId: this.$route.params && this.$route.params.id,
       attributes: {}
     }
   },
