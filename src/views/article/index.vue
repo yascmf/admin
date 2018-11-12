@@ -16,6 +16,7 @@ export default {
       module: 'article',
       basePath: '/content-management/',
       labels: {
+        title: '标题',
         flag: '推荐位',
         slug: '标识符',
         cid: '分类'
