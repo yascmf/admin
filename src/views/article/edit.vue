@@ -27,7 +27,7 @@ export default {
     this.attributes = config.attributes
     const query = {
       page: 1,
-      page_size: 9999
+      page_size: 150
     }
     resourceIndex('category', query).then(response => {
       console.log(response)

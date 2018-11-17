@@ -8,28 +8,25 @@
 import FastAdminCreate from '@/components/FastAdmin/create'
 import { resourceIndex } from '@/api/rest'
 import config from './config.js'
-import uuid from 'uuid'
-
-const content = `
-> writing markdown by [Simplemde](https://github.com/sparksuite/simplemde-markdown-editor) .
-`
 
 export default {
-  name: 'ArticleCreate',
+  name: 'ManagerCreate',
   components: {
     FastAdminCreate
   },
   data() {
     return {
-      module: 'article',
-      basePath: '/content-management/',
+      module: 'user',
+      basePath: '/user-management/',
       form: {
-        title: '',
-        slug: '',
-        cid: null,
-        flag: [],
-        description: '',
-        content: content
+        username: '',
+        email: '',
+        role: 4,
+        password: '',
+        password_confirmation: '',
+        is_locked: 0,
+        realname: '',
+        phone: ''
       },
       attributes: {}
     }
@@ -37,24 +34,23 @@ export default {
   mounted() {
   },
   created() {
-    this.form.slug = uuid.v4()
     this.attributes = config.attributes
     const query = {
       page: 1,
       page_size: 150
     }
-    resourceIndex('category', query).then(response => {
+    resourceIndex('role', query).then(response => {
       console.log(response)
-      const categories = response.items
+      const roles = response.items
       const options = []
-      categories.forEach((category, index) => {
-        console.log(category)
+      roles.forEach((role, index) => {
+        console.log(role)
         options.push({
-          label: category.name,
-          value: category.id
+          label: role.name + '[' + role.display_name + ']',
+          value: role.id
         })
       })
-      this.attributes.cid.options = options
+      this.attributes.role.options = options
       console.log(options)
       console.log(this.attributes)
     })

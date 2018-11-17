@@ -20,7 +20,7 @@
         <el-input v-model="form.password_confirmation" placeholder="请再次确认登录密码"></el-input>
       </el-form-item>
       <el-form-item label="手机号码">
-        <el-input v-model="form.phone" placeholder="请输入手机号码" maxlenth="11"></el-input>
+        <el-input v-model="form.phone" placeholder="请输入手机号码" maxlength="11"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">更新</el-button>

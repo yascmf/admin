@@ -1,118 +1,93 @@
 export default {
-  module: 'article',
-  basePath: '/content-management/',
+  module: 'user',
+  basePath: '/user-management/',
   labels: {
-    flag: '推荐位',
-    slug: '标识符',
-    cid: '分类'
+    username: '登录名',
+    nickname: '昵称',
+    email: '邮箱',
+    role: '角色',
+    is_locked: '状态'
   },
   castAttributes: {
-    flag: function(row) {
-      const flagArray = row.flag
-      var displayStr = ''
-      flagArray.forEach(function(value, key) {
-        displayStr = displayStr + '<span class="el-tag" style="margin-right:5px">' + value + '</span>'
-      })
-      return displayStr
+    role: function(row) {
+      return row.roles[0]['name']
     },
-    cid: function(row) {
-      return row.category.name
+    is_locked: function(row) {
+      return (row.is_locked === 1) ? '<span class="el-tag el-tag--danger">已锁定</span>' : '<span class="el-tag el-tag--success">正常</span>'
     }
   },
   form: {
-    title: '',
-    slug: '',
-    cid: null,
-    flag: [],
-    description: '',
-    content: ''
+    username: '',
+    email: '',
+    role: '',
+    password: '',
+    password_confirmation: '',
+    is_locked: 0,
+    realname: '',
+    phone: ''
   },
   attributes: {
-    title: {
-      label: '标题(*)',
+    username: {
+      label: '登录用户名(*)',
       displayAs: 'input',
       type: 'text',
-      placeholder: '请输入文章标题'
+      placeholder: '请输入用户名'
     },
-    slug: {
-      label: '标识符(*)',
+    email: {
+      label: '电子邮箱(*)',
       displayAs: 'input',
       type: 'text',
-      placeholder: '请输入文章标识符'
+      placeholder: '请输入电子邮箱'
     },
-    cid: {
-      label: '分类(*)',
+    role: {
+      label: '角色(*)',
       displayAs: 'select',
       options: [
         {
-          label: '默认',
-          value: '1'
+          label: '演示',
+          value: '4'
         }
       ],
-      placeholder: '请选择文章分类'
+      placeholder: '请选择角色'
     },
-    flag: {
-      label: '推荐位',
-      displayAs: 'checkbox',
-      options: [
-        {
-          label: 'l',
-          value: '链接'
-        },
-        {
-          label: 'f',
-          value: '幻灯'
-        },
-        {
-          label: 's',
-          value: '滚动'
-        },
-        {
-          label: 'h',
-          value: '热门'
-        },
-        {
-          label: 't',
-          value: '置顶'
-        }
-      ]
+    password: {
+      label: '登录密码(*)',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请输入登录密码'
     },
-    /*
-    is_top: {
-      label: '是否置顶',
+    password_confirmation: {
+      label: '确认登录密码(*)',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请再次确认登录密码'
+    },
+    is_locked: {
+      label: '状态',
       displayAs: 'radio',
       options: [
         {
           label: 0,
-          value: '否'
+          value: '正常'
         },
         {
           label: 1,
-          value: '是'
+          value: '锁定'
         }
       ],
-      placeholder: '请选择文章是否置顶'
+      placeholder: '请选择状态'
     },
-    */
-    description: {
-      label: '摘要(*)',
+    realname: {
+      label: '真实姓名',
       displayAs: 'input',
-      type: 'textarea',
-      placeholder: '请输入文章摘要'
+      type: 'text',
+      placeholder: '请输入真实姓名'
     },
-    /*
-    content: {
-      label: '正文(*)',
-      displayAs: 'markdownEditor',
-      poweredBy: 'Simplemde',
-      placeholder: '请输入文章正文'
-    }
-    */
-    content: {
-      label: '正文(*)',
-      displayAs: 'richEditor',
-      poweredBy: 'Tinymce',
-      placeholder: '请输入文章正文'
+    phone: {
+      label: '手机号码',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请输入手机号码'
     }
   }
 }

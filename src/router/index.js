@@ -124,6 +124,23 @@ export const constantRouterMap = [
         name: 'Manager (User)',
         component: () => import('@/views/user/index'),
         meta: { title: '管理员(用户)', icon: 'manager' }
+      },
+      {
+        path: 'user/create',
+        hidden: true,
+        component: () => import('@/views/user/create')
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        component: () => import('@/views/role/index'),
+        meta: { title: '角色', icon: 'role' }
+      },
+      {
+        path: 'permission',
+        name: 'Permission',
+        component: () => import('@/views/permission/index'),
+        meta: { title: '权限', icon: 'permission' }
       }
     ]
   },

@@ -1,8 +1,15 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name:{{username}}</div>
-    <div class="dashboard-text">role:{{role}}</span></div>
-    <div class="dashboard-text">cans:<div class="dashboard-can-container"><el-tag v-for='can in cans' :key='can'>{{can}}</el-tag></div></div>
+    <div class="dashboard-text"><span>用户名: <code>{{username}}</code></span></div>
+    <div class="dashboard-text"><span>角色: <code>{{role}}</code></span></div>
+    <div class="dashboard-text"><span>当前用户所拥有的权限:</span>
+      <div class="dashboard-can-container">
+        <template v-for="can in cans">
+          <div class="tag-can" v-if="can.indexOf('@') === 0"><el-tag type="success">{{can}}</el-tag></div>
+          <div class="tag-can" v-else><el-tag type="info">{{can}}</el-tag></div>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,12 +34,15 @@ export default {
     margin: 30px;
   }
   &-text {
-    font-size: 30px;
-    line-height: 46px;
+    font-size: 24px;
+    line-height: 48px;
   }
   &-can-container {
     .el-tag {
       margin-right: 5px;
+    }
+    .tag-can {
+      display: inline-block;
     }
   }
 }

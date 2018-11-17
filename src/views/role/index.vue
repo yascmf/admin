@@ -7,20 +7,17 @@ import FastAdminIndex from '@/components/FastAdmin/index'
 import config from './config.js'
 
 export default {
-  name: 'ManagerIndex',
+  name: 'RoleIndex',
   components: {
     FastAdminIndex
   },
   data() {
     return {
-      module: 'user',
+      module: 'role',
       basePath: '/user-management/',
       labels: {
-        username: '登录名',
-        nickname: '昵称',
-        email: '邮箱',
-        role: '角色',
-        is_locked: '状态'
+        name: '角色名',
+        display_name: '角色展示名'
       },
       castAttributes: config.castAttributes
     }
