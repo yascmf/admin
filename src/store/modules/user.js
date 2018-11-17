@@ -1,26 +1,31 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getProfile, logout } from '@/api/me'
 
 const user = {
   state: {
     token: getToken(),
-    name: '',
+    username: '',
     avatar: '',
-    roles: []
+    role: '',
+    cans: []
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
-      state.name = name
+    SET_USERNAME: (state, username) => {
+      state.username = username
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    SET_ROLE: (state, role) => {
+      state.role = role
+    },
+    SET_CANS: (state, cans) => {
+      state.cans = cans
     }
   },
 
@@ -43,15 +48,16 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo().then(response => {
+        getProfile().then(response => {
           const data = response
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+          if (data.role && data.role !== '') {
+            commit('SET_ROLE', data.role)
           } else {
             reject('getInfo: roles must be a non-null array !')
           }
-          commit('SET_NAME', data.name)
+          commit('SET_USERNAME', data.username)
           commit('SET_AVATAR', data.avatar)
+          commit('SET_CANS', data.cans)
           resolve(response)
         }).catch(error => {
           reject(error)

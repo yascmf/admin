@@ -53,7 +53,7 @@ export const constantRouterMap = [
   {
     path: '/content-management',
     component: Layout,
-    name: 'content',
+    name: 'ContentManagement',
     meta: { title: '内容管理', icon: 'content' },
     children: [
       {
@@ -106,6 +106,28 @@ export const constantRouterMap = [
       }
     ]
   },
+
+  {
+    path: '/user-management',
+    component: Layout,
+    name: 'UserManagement',
+    meta: { title: '用户管理', icon: 'user' },
+    children: [
+      {
+        path: 'me',
+        name: 'Me',
+        component: () => import('@/views/me/profile'),
+        meta: { title: '个人资料', icon: 'me' }
+      },
+      {
+        path: 'user',
+        name: 'Manager (User)',
+        component: () => import('@/views/user/index'),
+        meta: { title: '管理员(用户)', icon: 'manager' }
+      }
+    ]
+  },
+
   /*
   {
     path: '/example',
