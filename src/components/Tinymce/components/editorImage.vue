@@ -11,7 +11,7 @@
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
-        action="http://127.0.0.1:9000/x/upload/file"
+        :action="action"
         list-type="picture-card">
         <el-button size="small" type="primary">点击上传</el-button>
       </el-upload>
@@ -36,7 +36,9 @@ export default {
     return {
       dialogVisible: false,
       listObj: {},
-      fileList: []
+      fileList: [],
+      action: process.env.BASE_API + 'upload/file'
+      // action: 'https://httpbin.org/post'
     }
   },
   methods: {
