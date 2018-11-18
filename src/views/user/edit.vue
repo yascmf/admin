@@ -1,5 +1,13 @@
 <template>
-  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" ref="editForm"></FastAdminEdit>
+  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" ref="editForm" :addons="addons">
+    <template slot="fieldsSlot">
+      <el-form-item label="角色">
+        <el-select v-model="addons.role" placeholder="请选择角色">
+          <el-option v-for="option in roleOptions" :key="option.label" :label="option.label" :value="option.value"></el-option>
+        </el-select>
+      </el-form-item>
+    </template>
+  </FastAdminEdit>
 </template>
 
 <script>
@@ -17,20 +25,20 @@ export default {
       module: 'user',
       basePath: '/user-management/',
       resourceId: this.$route.params && this.$route.params.id,
-      attributes: {}
+      attributes: {},
+      roleOptions: [
+        {
+          label: '演示',
+          value: '4'
+        }
+      ],
+      addons: {
+        role: 4
+      }
     }
   },
-  /*
-  beforeUpdate() {
-    console.log(this.$refs)
-    if (this.$refs.form.roles.length === 0) {
-      this.$refs.form.role = 4
-    } else {
-      this.$refs.form.role = this.$refs.form.roles[0]['id']
-    }
-  },
-  */
   mounted() {
+    delete config.attributes.role
     this.attributes = config.attributes
     const query = {
       page: 1,
@@ -47,12 +55,13 @@ export default {
           value: role.id
         })
       })
-      this.attributes.role.options = options
+      // this.attributes.role.options = options
+      this.roleOptions = options
       console.log(this.$refs.editForm.$data.form.roles)
       if (this.$refs.editForm.$data.form.roles.length === 0) {
-        this.$refs.editForm.$data.form.role = 4
+        this.addons.role = 4
       } else {
-        this.$refs.editForm.$data.form.role = this.$refs.editForm.$data.form.roles[0]['id']
+        this.addons.role = this.$refs.editForm.$data.form.roles[0]['id']
       }
     })
   },

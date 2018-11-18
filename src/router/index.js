@@ -142,6 +142,16 @@ export const constantRouterMap = [
         meta: { title: '角色', icon: 'role' }
       },
       {
+        path: 'role/create',
+        hidden: true,
+        component: () => import('@/views/role/create')
+      },
+      {
+        path: 'role/:id/edit',
+        hidden: true,
+        component: () => import('@/views/role/edit')
+      },
+      {
         path: 'permission',
         name: 'Permission',
         component: () => import('@/views/permission/index'),

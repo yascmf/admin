@@ -1,0 +1,83 @@
+<template>
+  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" :addons="addons" ref="editForm">
+      <template slot="fieldsSlot">
+        <el-form-item label="权限(*)">
+          <el-transfer style="text-align: left; display: inline-block;" :titles="['可选权限', '已选权限']" v-model="addons.permissions" :data="permissionOptions">
+          </el-transfer>
+        </el-form-item>
+      </template>
+  </FastAdminEdit>
+</template>
+
+<script>
+import FastAdminEdit from '@/components/FastAdmin/edit'
+import { resourceIndex } from '@/api/rest'
+import config from './config.js'
+
+export default {
+  name: 'RoleEdit',
+  components: {
+    FastAdminEdit
+  },
+  data() {
+    return {
+      module: 'role',
+      basePath: '/user-management/',
+      resourceId: this.$route.params && this.$route.params.id,
+      attributes: {},
+      permissionOptions: [],
+      addons: {
+        permissions: []
+      }
+    }
+  },
+  mounted() {
+    this.attributes = config.attributes
+    const query = {
+      page: 1,
+      page_size: 150
+    }
+    resourceIndex('permission', query).then(response => {
+      console.log(response)
+      const permissions = response.items
+      const options = []
+      permissions.forEach((permission, index) => {
+        options.push({
+          label: permission.name + '[' + permission.display_name + ']',
+          key: permission.id
+        })
+      })
+      this.permissionOptions = options
+      const perms = this.$refs.editForm.$data.form.perms
+      console.log(perms)
+      if (perms.length === 0) {
+        this.addons.permissions = []
+      } else {
+        const cans = []
+        perms.forEach((perm) => {
+          cans.push(perm.id)
+        })
+        this.addons.permissions = cans
+      }
+    })
+  },
+  methods: {
+  }
+}
+</script>
+
+<style scoped>
+.edit-input {
+  padding-right: 100px;
+}
+.cancel-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+</style>
+<style>
+.el-transfer-panel {
+  width: 350px;
+}
+</style>
