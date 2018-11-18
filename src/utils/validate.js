@@ -5,8 +5,8 @@ import validator from 'validator'
 // see https://github.com/chriso/validator.js
 
 export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+  // const valid_map = ['admin', 'editor']
+  return str.trim().length >= 5
 }
 
 /* 合法uri*/

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="resource-operation">
+    <div class="resource-operation" v-if="cans.indexOf(module + '-write') >= 0">
       <el-row>
         <el-button icon='el-icon-plus' type="primary" @click.prevent.stop="resourceCreateRouter">创建</el-button>
       </el-row>
@@ -28,7 +28,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">
-          <router-link :to="basePath + module + '/' + scope.row.id + '/edit'">
+          <router-link v-if="cans.indexOf(module + '-write') >=0 " :to="basePath + module + '/' + scope.row.id + '/edit'">
             <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
         </template>
@@ -46,6 +46,7 @@
 
 <script>
 import { resourceIndex } from '@/api/rest'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'FastAdminIndex',
@@ -54,6 +55,11 @@ export default {
     basePath: String,
     labels: Object,
     castAttributes: Object
+  },
+  computed: {
+    ...mapGetters([
+      'cans'
+    ])
   },
   data() {
     return {

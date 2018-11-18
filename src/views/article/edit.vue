@@ -21,7 +21,6 @@ export default {
     }
   },
   mounted() {
-    this.attributes = config.attributes
   },
   created() {
     this.attributes = config.attributes

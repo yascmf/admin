@@ -9,8 +9,15 @@ export default {
     is_locked: '状态'
   },
   castAttributes: {
+    nickname: function(row) {
+      return row.nickname || '-'
+    },
     role: function(row) {
-      return row.roles[0]['name']
+      if (row.roles.length === 0) {
+        return '-'
+      } else {
+        return row.roles[0]['name']
+      }
     },
     is_locked: function(row) {
       return (row.is_locked === 1) ? '<span class="el-tag el-tag--danger">已锁定</span>' : '<span class="el-tag el-tag--success">正常</span>'
@@ -19,7 +26,7 @@ export default {
   form: {
     username: '',
     email: '',
-    role: '',
+    role: 4,
     password: '',
     password_confirmation: '',
     is_locked: 0,
@@ -76,6 +83,12 @@ export default {
         }
       ],
       placeholder: '请选择状态'
+    },
+    nickname: {
+      label: '昵称',
+      displayAs: 'input',
+      type: 'text',
+      placeholder: '请输入昵称'
     },
     realname: {
       label: '真实姓名',

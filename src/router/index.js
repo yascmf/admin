@@ -131,6 +131,11 @@ export const constantRouterMap = [
         component: () => import('@/views/user/create')
       },
       {
+        path: 'user/:id/edit',
+        hidden: true,
+        component: () => import('@/views/user/edit')
+      },
+      {
         path: 'role',
         name: 'Role',
         component: () => import('@/views/role/index'),
