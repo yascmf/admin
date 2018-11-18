@@ -77,23 +77,6 @@ export default {
         }
       ]
     },
-    /*
-    is_top: {
-      label: '是否置顶',
-      displayAs: 'radio',
-      options: [
-        {
-          label: 0,
-          value: '否'
-        },
-        {
-          label: 1,
-          value: '是'
-        }
-      ],
-      placeholder: '请选择文章是否置顶'
-    },
-    */
     description: {
       label: '摘要(*)',
       displayAs: 'input',
