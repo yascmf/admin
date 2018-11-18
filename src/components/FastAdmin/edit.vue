@@ -68,7 +68,8 @@ export default {
     basePath: String,
     labels: Object,
     attributes: Object,
-    resourceId: null
+    resourceId: null,
+    addons: Object
   },
   data() {
     return {
@@ -87,9 +88,13 @@ export default {
   },
   methods: {
     handleUpdateResource() {
+      const postForm = {}
       console.log(this.form)
+      console.log(this.addons)
+      Object.assign(postForm, this.form, this.addons)
+      console.log(postForm)
       this.loading = true
-      resourceUpdate(this.module, this.resourceId, this.form).then(response => {
+      resourceUpdate(this.module, this.resourceId, postForm).then(response => {
         this.loading = false
         this.$router.push({ path: this.basePath + this.module })
       }).catch(() => {
