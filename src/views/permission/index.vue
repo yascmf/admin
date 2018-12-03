@@ -9,8 +9,8 @@
 
     <div class="permission-container">
       <template v-for="permission in permissions">
-        <div class="tag-permission" v-if="permission.name.indexOf('@') === 0"><el-tag type="success">{{permission.name}}[{{permission.display_name}}]</el-tag></div>
-        <div class="tag-permission" v-else><el-tag type="info">{{permission.name}}[{{permission.display_name}}]</el-tag></div>
+        <div class="tag-permission" v-if="permission.name.indexOf('@') === 0" v-bind:key="permission.id"><el-tag type="success">{{permission.name}}[{{permission.display_name}}]</el-tag></div>
+        <div class="tag-permission" v-else v-bind:key="permission.id"><el-tag type="info">{{permission.name}}[{{permission.display_name}}]</el-tag></div>
       </template>
     </div>
 
@@ -47,9 +47,8 @@ export default {
   &-container {
     margin: 30px;
     .tag-permission {
-      float: left;
       margin: 5px;
-      display: inline;
+      display: inline-block;
     }
   }
   &-text {
