@@ -92,7 +92,7 @@ export const constantRouterMap = [
         path: 'category',
         name: 'Category',
         component: () => import('@/views/category/index'),
-        meta: { title: '分类', icon: 'tree' }
+        meta: { title: '分类', icon: 'category' }
       },
       {
         path: 'category/create',
