@@ -16,7 +16,7 @@ npm run dev
 
 ### 安全说明
 
-`simplemde` （<= 1.11.2）组件存在 `XSS` 漏洞，目前官方没有修复，请慎用该组件。
+`simplemde` （<= 1.11.2）组件存在 `XSS` [漏洞](https://nvd.nist.gov/vuln/detail/CVE-2018-19057)，目前官方没有修复该漏洞，请慎用或限制使用该组件。
 
 ### 二次开发
 

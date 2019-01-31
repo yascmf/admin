@@ -5,14 +5,18 @@
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
         :multiple="true"
+        :limit="5"
         :file-list="fileList"
         :show-file-list="true"
         :on-remove="handleRemove"
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
+        :on-exceed="handleExceed"
         class="editor-slide-upload"
         :action="action"
+        accept="image/*"
         list-type="picture-card">
+        <div slot="tip" class="el-upload__tip">只能上传 jpg/png/gif 图片文件，且不超过5MB</div>
         <el-button size="small" type="primary">点击上传</el-button>
       </el-upload>
       <el-button @click="dialogVisible = false">取 消</el-button>
@@ -37,11 +41,13 @@ export default {
       dialogVisible: false,
       listObj: {},
       fileList: [],
-      action: process.env.BASE_API + 'upload/file'
-      // action: 'https://httpbin.org/post'
+      action: process.env.BASE_API + '/upload/file'
     }
   },
   methods: {
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 5 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+    },
     checkAllSuccess() {
       return Object.keys(this.listObj).every(item => this.listObj[item].hasSuccess)
     },
