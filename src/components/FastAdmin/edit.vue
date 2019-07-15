@@ -82,6 +82,18 @@ export default {
     resourceShow(this.module, this.resourceId).then(response => {
       this.form = response
       this.loading = false
+      const addons = {
+        permissions: []
+      }
+      const perms = this.form.perms
+      if (perms.length !== 0) {
+        const cans = []
+        perms.forEach((perm) => {
+          cans.push(perm.id)
+        })
+        addons.permissions = cans
+        this.$emit('update:addons', addons)
+      }
     }).catch(() => {
       this.loading = false
     })

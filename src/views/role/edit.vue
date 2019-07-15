@@ -1,5 +1,5 @@
 <template>
-  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" :addons="addons" ref="editForm">
+  <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" :addons.sync="addons" ref="editForm">
       <template slot="fieldsSlot">
         <el-form-item label="权限(*)">
           <el-transfer style="text-align: left; display: inline-block;" :titles="['可选权限', '已选权限']" v-model="addons.permissions" :data="permissionOptions">
@@ -48,17 +48,6 @@ export default {
         })
       })
       this.permissionOptions = options
-      const perms = this.$refs.editForm.$data.form.perms
-      console.log(perms)
-      if (perms.length === 0) {
-        this.addons.permissions = []
-      } else {
-        const cans = []
-        perms.forEach((perm) => {
-          cans.push(perm.id)
-        })
-        this.addons.permissions = cans
-      }
     })
   },
   methods: {
