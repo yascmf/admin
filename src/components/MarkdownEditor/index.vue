@@ -59,6 +59,11 @@ export default {
       insertTexts: {
         link: ['[', ']( )']
       },
+      renderingConfig: {
+        markedOptions: {
+            sanitize: true
+        }
+      },
       // hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
       placeholder: this.placeholder
     })
