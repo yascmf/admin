@@ -2,7 +2,7 @@
   <FastAdminEdit :module="module" :attributes="attributes" :basePath="basePath" :resourceId="resourceId" :addons.sync="addons" ref="editForm">
       <template slot="fieldsSlot">
         <el-form-item label="权限(*)">
-          <el-transfer style="text-align: left; display: inline-block;" :titles="['可选权限', '已选权限']" v-model="addons.permissions" :data="permissionOptions">
+          <el-transfer :titles="['可选权限', '已选权限']" v-model="addons.permissions" :data="permissionOptions" style="text-align: left; display: inline-block; line-height: 16px">
           </el-transfer>
         </el-form-item>
       </template>
