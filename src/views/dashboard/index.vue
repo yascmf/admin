@@ -5,8 +5,8 @@
     <div class="dashboard-text"><span>当前用户所拥有的权限:</span>
       <div class="dashboard-can-container">
         <template v-for="can in cans">
-          <div class="tag-can" v-if="can.indexOf('@') === 0"><el-tag type="success">{{can}}</el-tag></div>
-          <div class="tag-can" v-else><el-tag type="info">{{can}}</el-tag></div>
+          <div class="tag-can" v-if="can.indexOf('@') === 0" :key='can'><el-tag type="success">{{can}}</el-tag></div>
+          <div class="tag-can" v-else :key='can'><el-tag type="info">{{can}}</el-tag></div>
         </template>
       </div>
     </div>

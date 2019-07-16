@@ -9,21 +9,21 @@
         </template>
         <template v-else-if="attribute.displayAs === 'select'">
           <el-form-item :label="attribute.label">
-            <el-select v-model="form[key]" :placeholder="attribute.placeholder">
+            <el-select v-if="form[key]" v-model="form[key]" :placeholder="attribute.placeholder">
               <el-option v-for="option in attribute.options" :key="option.label" :label="option.label" :value="option.value"></el-option>
             </el-select>
           </el-form-item>
         </template>
         <template v-else-if="attribute.displayAs === 'checkbox'">
           <el-form-item :label="attribute.label">
-            <el-checkbox-group v-model="form[key]">
+            <el-checkbox-group v-if="form[key]" v-model="form[key]">
               <el-checkbox v-for="option in attribute.options" :key="option.label" :label="option.label" :name="key">{{option.value}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </template>
         <template v-else-if="attribute.displayAs === 'radio'">
           <el-form-item :label="attribute.label">
-            <el-radio-group v-model="form[key]">
+            <el-radio-group v-if="form[key]" v-model="form[key]">
               <el-radio v-for="option in attribute.options" :key="option.label" :label="option.label">{{option.value}}</el-radio>
             </el-radio-group>
           </el-form-item>
@@ -79,21 +79,11 @@ export default {
   },
   created() {
     this.loading = true
+    // setTimeout(function() { console.log('wait a moment!') }, 3000)
     resourceShow(this.module, this.resourceId).then(response => {
       this.form = response
       this.loading = false
-      const addons = {
-        permissions: []
-      }
-      const perms = this.form.perms
-      if (perms.length !== 0) {
-        const cans = []
-        perms.forEach((perm) => {
-          cans.push(perm.id)
-        })
-        addons.permissions = cans
-        this.$emit('update:addons', addons)
-      }
+      this.$emit('sync-perms', this.form.perms ? this.form.perms : [])
     }).catch(() => {
       this.loading = false
     })
