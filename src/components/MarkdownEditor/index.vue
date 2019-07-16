@@ -61,7 +61,7 @@ export default {
       },
       renderingConfig: {
         markedOptions: {
-            sanitize: true
+          sanitize: true
         }
       },
       // hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
